@@ -38,6 +38,7 @@ class Vhod_win(QMainWindow, Ui_Main):
         username = self.lineEdit.text()
         password = self.lineEdit_2.text()
         data = self.datab.login(username, password)
+        print(data)
         if data == []:
             error = QMessageBox()
             error.setWindowTitle('ОШИБКА!')
@@ -78,7 +79,6 @@ class Registr_win(QMainWindow, Ui_widget):
     def reg(self):
         con = sqlite3.connect('main.db')
         cur = con.cursor()
-        print(self.emai_line.text())
         cur.execute(f'SELECT * FROM users WHERE username="{self.reg_line.text()}";')
         value = cur.fetchall()
 
