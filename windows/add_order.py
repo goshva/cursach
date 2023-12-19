@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+import sqlite3
 
 class Ui_add_ord(object):
     def setupUi(self, Form):
@@ -29,6 +29,8 @@ class Ui_add_ord(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.add_btn.clicked.connect(self.add_ord)
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Добавление заказа"))
@@ -36,6 +38,28 @@ class Ui_add_ord(object):
         self.dish_add.setPlaceholderText(_translate("Form", "Выберете блюдо..."))
         self.stol_num.setPlaceholderText(_translate("Form", "Введите номер стола"))
 
+    def add_ord(self):
+        con = sqlite3.connect('main.db')
+        cur = con.cursor()
+        cur.execute(f'SELECT * FROM orders WHERE dish_name="{self.dish_add.text()}"'
+                    f' and table_num ="{self.stol_num.currentText()}";')
+        value = cur.fetchall()
+
+        if value != []:
+            error = QtWidgets.QMessageBox()
+            error.setWindowTitle('Ошибка!')
+            error.setText('Такой заказ уже имеется!')
+            error.exec()
+
+        elif value == []:
+            cur.execute(f"INSERT INTO orders (dish_name, table_num) VALUES ('{self.dish_add.text()}' ,"
+                        f" '{self.stol_num.currentText()}');")
+            con.commit()
+            con.close
+            done = QtWidgets.QMessageBox()
+            done.setWindowTitle("Успешно!")
+            done.setText('Заказ успешно создан!')
+            done.exec()
 
 if __name__ == "__main__":
     import sys

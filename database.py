@@ -8,8 +8,9 @@ cur = con.cursor()
 #cur.execute(f"INSERT INTO users (username, password, email, role) VALUES('admin','admin', 'admin@gmail.com', 'admin'),('waiter','waiter', 'waiter@gmail.com', 'waiter')")
 
 #таблица заказов
-#cur.execute(f'CREATE TABLE orders ( "id" INTEGER, "dish_name" VARCHAR(30) UNIQUE, "table_num" integer(30), PRIMARY KEY("id" AUTOINCREMENT) )')
+#cur.execute(f'CREATE TABLE orders ( "id" INTEGER, "dish_name" NTEGER NOT NULL, "table_num" integer(30), PRIMARY KEY("id" AUTOINCREMENT),FOREIGN KEY (dish_name) REFERENCES menu (name_dish) )')
 #cur.execute(f"INSERT INTO orders (dish_name, table_num) VALUES('Брускетта с томатами','2'),('Панна-котта с клубникой','6'), ('Филе миньон с красным вином','1'), ('Карпаччо осьминог','5')")
+
 
 #таблица клиентов
 #cur.execute(f'CREATE TABLE clients ( "id" INTEGER, "name" VARCHAR(30), "lastname" VARCHAR(30), "phone_number" VARCHAR(30), "discount" INTEGER(20), PRIMARY KEY("id" AUTOINCREMENT) )')

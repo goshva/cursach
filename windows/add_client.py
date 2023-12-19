@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+import sqlite3
 
 class Ui_add_client(object):
     def setupUi(self, Form):
@@ -15,9 +15,9 @@ class Ui_add_client(object):
         Form.resize(313, 266)
         Form.setStyleSheet("font: 8pt \"MS Gothic\";\n"
 "background-color: rgb(212, 212, 212);")
-        self.name_lline = QtWidgets.QLineEdit(parent=Form)
-        self.name_lline.setGeometry(QtCore.QRect(10, 20, 291, 31))
-        self.name_lline.setObjectName("name_lline")
+        self.name_line = QtWidgets.QLineEdit(parent=Form)
+        self.name_line.setGeometry(QtCore.QRect(10, 20, 291, 31))
+        self.name_line.setObjectName("name_line")
         self.lastname_line = QtWidgets.QLineEdit(parent=Form)
         self.lastname_line.setGeometry(QtCore.QRect(10, 70, 291, 31))
         self.lastname_line.setText("")
@@ -35,11 +35,49 @@ class Ui_add_client(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.add_btn.clicked.connect(self.add_cl)
+
+    def add_cl(self):
+        con = sqlite3.connect('main.db')
+        cur = con.cursor()
+        cur.execute(f'SELECT * FROM clients WHERE name="{self.name_line.text()}" '
+                    f'and lastname ="{self.lastname_line.text()}" '
+                    f'and phone_number ="{self.phone_line.text()}" '
+                    f'and discount ="{self.skidka_line.text()}";')
+        value = cur.fetchall()
+
+        if value != []:
+            error = QtWidgets.QMessageBox()
+            error.setWindowTitle('Ошибка!')
+            error.setText('Такой Клиент уже есть!')
+            error.exec()
+
+        elif value == []:
+            cur.execute(f"INSERT INTO clients (name, lastname, phone_number, discount) "
+                        f"VALUES('{self.name_line.text()}', '{self.lastname_line.text()}', "
+                        f"'{self.phone_line.text()}', '{self.skidka_line.text()}');")
+            con.commit()
+            con.close
+            done = QtWidgets.QMessageBox()
+            done.setWindowTitle("Успешно!")
+            done.setText('Клиент добавлен!')
+            done.exec()
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Добавить клиента"))
-        self.name_lline.setPlaceholderText(_translate("Form", "Введите имя..."))
+        self.name_line.setPlaceholderText(_translate("Form", "Введите имя..."))
         self.lastname_line.setPlaceholderText(_translate("Form", "Введите фамилию..."))
         self.phone_line.setPlaceholderText(_translate("Form", "Введите номер телефона..."))
         self.skidka_line.setPlaceholderText(_translate("Form", "Введите процент скидки..."))
         self.add_btn.setText(_translate("Form", "Добавить "))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_add_client()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec())

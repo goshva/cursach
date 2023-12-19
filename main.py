@@ -1,7 +1,5 @@
 #Сделать!!!
-'''1) авторизация
-2) добавление в бд
-3) сделать связь заказ-меню
+'''1) авторизация(частично сделанна)
 '''
 
 
@@ -76,13 +74,14 @@ class Vhod_win(QMainWindow, Ui_Main):
         role = self.combobox2.currentText()
         check_us = self.check_db.thr_login(username, password)
         role_us = self.check_db.thr_role(username, role)
-        if check_us == username and role_us == 'admin':
+        oficiant_win.show()
+'''        if check_us == username and role_us == 'admin':
             vhod_win.close()
             admin_win.show()
         elif check_us == username and role_us == 'waiter':
             vhod_win.close()
             oficiant_win.show()
-
+'''
 
 
 #Окно регистрации
@@ -105,7 +104,10 @@ class Registr_win(QMainWindow, Ui_widget):
         value = cur.fetchall()
 
         if value != []:
-            print('Имя пользователя уже используется!')
+            error = QMessageBox()
+            error.setWindowTitle('Ошибка!')
+            error.setText('Имя пользователя уже используется!')
+            error.exec()
 
         elif value == []:
             cur.execute(f"INSERT INTO users (username, password, email, role)"
@@ -113,7 +115,10 @@ class Registr_win(QMainWindow, Ui_widget):
                         f" '{self.emai_line.text()}', '{self.combobox2.currentText()}')")
             con.commit()
             con.close
-            print('Успешная регистарция!')
+            done = QMessageBox()
+            done.setWindowTitle('Успешно!')
+            done.setText('Пользователь успешно зарегестрирован!')
+            done.exec()
 
         reg_win.close()
 
