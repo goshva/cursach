@@ -1,7 +1,7 @@
 #Сделать!!!
 '''1) авторизация
-2)окно добавления сотрудника
-3) меню
+2) добавление в бд
+3) сделать связь заказ-меню
 '''
 
 
@@ -74,24 +74,14 @@ class Vhod_win(QMainWindow, Ui_Main):
         username = self.lineEdit.text()
         password = self.lineEdit_2.text()
         role = self.combobox2.currentText()
-        self.check_db.thr_login(username, password)
-        oficiant_win.show()
-        vhod_win.close()
-
-        '''data = self.datab.login(username, password)
-
-        if data == []:
-            error = QMessageBox()
-            error.setWindowTitle('ОШИБКА!')
-            error.setText('Ошибка авторизации!')
-            error.exec()
-        else:
-            if role == 'admin':
-                admin_win.show()
-                vhod_win.close()
-            elif role == 'waiter':
-                oficiant_win.show() 
-                vhod_win.close()'''
+        check_us = self.check_db.thr_login(username, password)
+        role_us = self.check_db.thr_role(username, role)
+        if check_us == username and role_us == 'admin':
+            vhod_win.close()
+            admin_win.show()
+        elif check_us == username and role_us == 'waiter':
+            vhod_win.close()
+            oficiant_win.show()
 
 
 
@@ -118,7 +108,9 @@ class Registr_win(QMainWindow, Ui_widget):
             print('Имя пользователя уже используется!')
 
         elif value == []:
-            cur.execute(f"INSERT INTO users (username, password, email, role) VALUES ('{self.reg_line.text()}', '{self.pass_line.text()}', '{self.emai_line.text()}', '{self.combobox2.currentText()}')")
+            cur.execute(f"INSERT INTO users (username, password, email, role)"
+                        f" VALUES ('{self.reg_line.text()}', '{self.pass_line.text()}',"
+                        f" '{self.emai_line.text()}', '{self.combobox2.currentText()}')")
             con.commit()
             con.close
             print('Успешная регистарция!')
@@ -139,7 +131,7 @@ class Admin_win(QMainWindow, Ui_Form):
         self.sotrudniki.clicked.connect(self.emp_btn)
         self.menu.clicked.connect(self.menu_btn)
         self.klienti.clicked.connect(self.clients)
-
+        
     def back(self):
         admin_win.close()
         vhod_win.show()
@@ -149,7 +141,6 @@ class Admin_win(QMainWindow, Ui_Form):
 
     def menu_btn(self):
         menu_win.show()
-
 
     def clients(self):
         clients_win.show()
@@ -181,7 +172,7 @@ class Oficiant_win(QMainWindow, Ui_Form_of):
 
         self.pushButton_5.clicked.connect(self.back)
         self.pushButton_3.clicked.connect(self.menu_btn)
-        self.pushButton_4.clicked.connect(self.zakazi)
+        self.pushButton_4.clicked.connect(self.orders)
 
     def back(self):
         oficiant_win.close()
@@ -191,7 +182,7 @@ class Oficiant_win(QMainWindow, Ui_Form_of):
         menu_win.show()
 
 
-    def zakazi(self):
+    def orders(self):
         zakaz_win.show()
 
 
@@ -208,7 +199,7 @@ class Menu_win(QMainWindow, Ui_Menu):
 
 
 #окно заказов
-class Zakaz_win(QMainWindow, Ui_ord):
+class Orders_win(QMainWindow, Ui_ord):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -269,7 +260,7 @@ reg_win = Registr_win()
 
 menu_win = Menu_win()
 emp_win = Employers()
-zakaz_win = Zakaz_win()
+zakaz_win = Orders_win()
 clients_win = Clients()
 
 add_client = Add_client()

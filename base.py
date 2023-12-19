@@ -1,6 +1,7 @@
 import sys
 from PyQt6 import QtCore, QtGui, QtWidgets
 import sqlite3
+from PyQt6.QtWidgets import QMessageBox
 
 
 class Database():
@@ -16,3 +17,4 @@ class Database():
         self.cur.execute(f'SELECT * FROM users WHERE username="{username}" and password="{password}";')
         value = self.cur.fetchall()
         return value
+    

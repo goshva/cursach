@@ -29,7 +29,7 @@ class Ui_Main(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.combobox2 = QtWidgets.QComboBox(parent=Form)
         self.combobox2.setGeometry(QtCore.QRect(40, 160, 271, 31))
-        self.combobox2.addItems(['Admin', 'Waiter'])
+        self.combobox2.addItems(['admin', 'waiter'])
         self.combobox2.setObjectName("combobox2")
 
         self.retranslateUi(Form)
