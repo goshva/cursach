@@ -72,16 +72,17 @@ class Vhod_win(QMainWindow, Ui_Main):
         username = self.lineEdit.text()
         password = self.lineEdit_2.text()
         role = self.combobox2.currentText()
-        check_us = self.check_db.thr_login(username, password)
-        role_us = self.check_db.thr_role(username, role)
-        oficiant_win.show()
-'''        if check_us == username and role_us == 'admin':
+        self.check_db.thr_login(username, password)
+        self.check_db.thr_role(username, role)
+
+        if username == self.combobox2.currentText() and role == 'admin':
             vhod_win.close()
             admin_win.show()
-        elif check_us == username and role_us == 'waiter':
+        
+        elif username == self.combobox2.currentText() and role == 'waiter':
             vhod_win.close()
             oficiant_win.show()
-'''
+
 
 
 #Окно регистрации
