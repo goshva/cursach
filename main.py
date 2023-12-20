@@ -30,7 +30,6 @@ from check_db import *
 
 
 
-
 #Окно авторизации
 class Vhod_win(QMainWindow, Ui_Main):
     def __init__(self):
