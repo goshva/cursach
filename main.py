@@ -121,11 +121,13 @@ class Registr_win(QMainWindow, Ui_widget):
             done.setText('Пользователь успешно зарегестрирован!')
             done.exec()
             
+        if self.combobox2.currentText() == 'admin':
+            admin_win.show()
+            reg_win.close()
+        elif self.combobox2.currentText() == 'waiter':
+            oficiant_win.show()
+            reg_win.close()
 
-        reg_win.close()
-
-        admin_win.show()
-        
 
 
 #Окно админа

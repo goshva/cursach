@@ -6,7 +6,7 @@ cur = con.cursor()
 #таблица пользователей
 #cur.execute(f'CREATE TABLE users ("id" INTEGER, "username" VARCHAR(30) UNIQUE, "password" VARCHAR(30),"email" VARCHAR(30), "role" VARCHAR(20), PRIMARY KEY("id" AUTOINCREMENT))')
 #cur.execute(f"INSERT INTO users (username, password, email, role) VALUES('admin','admin', 'admin@gmail.com', 'admin'),('waiter','waiter', 'waiter@gmail.com', 'waiter')")
-
+#cur.execute('Drop table users;')
 #таблица заказов
 #cur.execute(f'CREATE TABLE orders ( "id" INTEGER, "dish_name" NTEGER NOT NULL, "table_num" integer(30), PRIMARY KEY("id" AUTOINCREMENT),FOREIGN KEY (dish_name) REFERENCES menu (name_dish) )')
 #cur.execute(f"INSERT INTO orders (dish_name, table_num) VALUES('Брускетта с томатами','2'),('Панна-котта с клубникой','6'), ('Филе миньон с красным вином','1'), ('Карпаччо осьминог','5')")
