@@ -120,6 +120,7 @@ class Registr_win(QMainWindow, Ui_widget):
             done.setWindowTitle('Успешно!')
             done.setText('Пользователь успешно зарегестрирован!')
             done.exec()
+            
 
         reg_win.close()
 

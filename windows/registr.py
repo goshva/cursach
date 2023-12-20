@@ -32,7 +32,7 @@ class Ui_widget(object):
         self.emai_line.setObjectName("emai_line")
         self.combobox2 = QtWidgets.QComboBox(parent=widget)
         self.combobox2.setGeometry(QtCore.QRect(80, 210, 241, 31))
-        self.combobox2.addItems(['admin', 'aaiter'])
+        self.combobox2.addItems(['admin', 'waiter'])
         self.combobox2.setObjectName("combobox2")
 
 
