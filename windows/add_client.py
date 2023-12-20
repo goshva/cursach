@@ -62,6 +62,7 @@ class Ui_add_client(object):
             done.setWindowTitle("Успешно!")
             done.setText('Клиент добавлен!')
             done.exec()
+            
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

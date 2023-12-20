@@ -28,6 +28,7 @@ def check_role(username, role):
     value = cur.fetchall()
 
     if value != [] and value[0][2] == role:
+        
         print('Роль успешно выбрана!')
     else:
         error = QMessageBox()

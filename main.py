@@ -1,9 +1,3 @@
-#Сделать!!!
-'''1) авторизация(частично сделанна)
-'''
-
-
-
 import sys
 import sqlite3
 from PyQt6 import QtCore, QtGui
@@ -24,10 +18,8 @@ from windows.add_emp import Ui_add_emp
 from windows.add_client import Ui_add_client
 from windows.add_order import Ui_add_ord
 
-
 from base import Database
 from check_db import *
-
 
 #Окно авторизации
 class Vhod_win(QMainWindow, Ui_Main):
@@ -46,15 +38,12 @@ class Vhod_win(QMainWindow, Ui_Main):
         self.check_db = CheckThread()
         self.check_db.mysignal.connect(self.signal_handler)
 
-
     def signal_handler(self, value):
         QtWidgets.QMessageBox.about(self, 'Оповещение', value)
-        
 
     def reg_bt(self):    
         vhod_win.close()
         reg_win.show()
-
 
     def check_input(funct):
         def wrapper(self):
@@ -81,10 +70,7 @@ class Vhod_win(QMainWindow, Ui_Main):
             vhod_win.close()
             oficiant_win.show()
 
-
-
 #Окно регистрации
-
 class Registr_win(QMainWindow, Ui_widget):
     def __init__(self):
         super().__init__()
@@ -126,8 +112,6 @@ class Registr_win(QMainWindow, Ui_widget):
             oficiant_win.show()
             reg_win.close()
 
-
-
 #Окно админа
 class Admin_win(QMainWindow, Ui_Form):
     def __init__(self):
@@ -152,7 +136,6 @@ class Admin_win(QMainWindow, Ui_Form):
     def clients(self):
         clients_win.show()
 
-
 #Сотрудники
 class Employers(QMainWindow, Ui_Emp, Ui_add_emp):
     def __init__(self):
@@ -169,7 +152,6 @@ class Employers(QMainWindow, Ui_Emp, Ui_add_emp):
 
     def add_emp(self):
         add_emp.show()
-
 
 #Окно официанта
 class Oficiant_win(QMainWindow, Ui_Form_of):
@@ -192,7 +174,6 @@ class Oficiant_win(QMainWindow, Ui_Form_of):
     def orders(self):
         zakaz_win.show()
 
-
 #окно меню
 class Menu_win(QMainWindow, Ui_Menu):
     def __init__(self):
@@ -203,7 +184,6 @@ class Menu_win(QMainWindow, Ui_Menu):
 
     def back(self):
         menu_win.close()
-
 
 #окно заказов
 class Orders_win(QMainWindow, Ui_ord):
@@ -235,9 +215,7 @@ class Clients(QMainWindow, Ui_Client):
     def add_client(self):
         add_client.show()
 
-
 #добавочные окна
-    
 class Add_client(QMainWindow, Ui_add_client):
     def __init__(self):
         super().__init__()
@@ -254,8 +232,6 @@ class Add_order(QMainWindow, Ui_add_ord):
         self.setupUi(self)   
 
 
-
-    
 app = QApplication([])
 
 vhod_win = Vhod_win()
