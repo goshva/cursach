@@ -32,7 +32,7 @@ class Ui_widget(object):
         self.emai_line.setObjectName("emai_line")
         self.combobox2 = QtWidgets.QComboBox(parent=widget)
         self.combobox2.setGeometry(QtCore.QRect(80, 210, 241, 31))
-        self.combobox2.addItems(['admin', 'waiter'])
+        self.combobox2.addItems(['администратор', 'официант'])
         self.combobox2.setObjectName("combobox2")
 
 
@@ -45,9 +45,9 @@ class Ui_widget(object):
         _translate = QtCore.QCoreApplication.translate
         widget.setWindowTitle(_translate("widget", "Регистрация"))
         self.reg_btn.setText(_translate("widget", "Зарегистрироваться"))
-        self.reg_line.setPlaceholderText(_translate("widget", "Username..."))
-        self.pass_line.setPlaceholderText(_translate("widget", "Password..."))
-        self.emai_line.setPlaceholderText(_translate("widget", "Email..."))
-        #self.lineEdit.setPlaceholderText(_translate("widget", "Role..."))
-        self.combobox2.setPlaceholderText(_translate("widget",'Role...'))
+        self.reg_line.setPlaceholderText(_translate("widget", "Ваше имя:"))
+        self.pass_line.setPlaceholderText(_translate("widget", "Пароль:"))
+        self.emai_line.setPlaceholderText(_translate("widget", "Почта:"))
+        #self.lineEdit.setPlaceholderText(_translate("widget", "Role:"))
+        self.combobox2.setPlaceholderText(_translate("widget",'Должность:'))
         self.combobox2.setCurrentIndex(-1)

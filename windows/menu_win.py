@@ -19,6 +19,9 @@ class Ui_Menu(object):
         self.menu_table = QtWidgets.QTableView(parent=Form)
         self.menu_table.setGeometry(QtCore.QRect(10, 20, 611, 411))
         self.menu_table.setObjectName("menu_table")
+        self.menu_table.horizontalHeader().hide()
+        self.menu_table.verticalHeader().hide()
+        self.menu_table.setColumnHidden(2, True)
         self.back_btn = QtWidgets.QPushButton(parent=Form)
         self.back_btn.setGeometry(QtCore.QRect(524, 440, 91, 23))
         self.back_btn.setObjectName("back_btn")
@@ -37,6 +40,7 @@ class Ui_Menu(object):
         model = QSqlQueryModel()
         model.setQuery(query)
         self.menu_table.setModel(model)
+        self.menu_table.setColumnHidden(0, True)
         self.menu_table.show()
 
     def retranslateUi(self, Form):
